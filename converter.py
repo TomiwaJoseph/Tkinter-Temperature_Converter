@@ -3,7 +3,7 @@ from tkinter import ttk
 
 
 root = Tk()
-root.geometry('400x230')
+root.geometry('400x235')
 root.resizable(0,0)
 temperatures = ('Celcius', 'Fahrenheit', 'Kelvin')
 
@@ -31,34 +31,38 @@ class Converter():
 
         Button(text='Convert',font='candara 14',bd=0,fg='white',
             width=8,bg='teal',command=self.convert).pack(pady=5)
-        self.output = Label(font='poppins 14')
+        self.output = Label(font='poppins 16')
 
     def convert(self):
         self.output.pack()
-        entry = self.entry.get()
         first, second = self.f_temp.get(), self.s_temp.get()
+
         # Check if user did not select given temperatures
         if first not in temperatures or second not in temperatures:
             self.output.config(text='Invalid Temperature',fg='red')
         # Check if user selected the same temperatures
         if first == second:
             self.output.config(text='Choose different temperatures',fg='orange red')
-        # Convert them and output the result
-        if first == 'Celcius' and second == 'Fahrenheit':
-            print('cel fah')
-        if first == 'Celcius' and second == 'Kelvin':
-            print('cel kel')
 
-        if first == 'Fahrenheit' and second == 'Celcius':
-            print('cel fah')
-        if first == 'Fahrenheit' and second == 'Kelvin':
-            print('cel kel')
+        try:
+            entry = int(self.entry.get())
+            # Convert them and output the result
+            if first == 'Celcius' and second == 'Fahrenheit':
+                self.output.config(text='Output: ' + str(round((entry * 9/5) + 32, 2)),fg='green')
+            if first == 'Celcius' and second == 'Kelvin':
+                self.output.config(text='Output: ' + str(round(entry + 273.15, 2)),fg='green')
 
-        if first == 'Kelvin' and second == 'Celcius':
-            print('cel fah')
-        if first == 'Kelvin' and second == 'Fahrenheit':
-            print('cel kel')
+            if first == 'Fahrenheit' and second == 'Celcius':
+                self.output.config(text='Output: ' + str(round((entry - 32) * 5/9, 2)),fg='green')
+            if first == 'Fahrenheit' and second == 'Kelvin':
+                self.output.config(text='Output: ' + str(round((entry - 32) * 5/9 + 273.15, 2)),fg='green')
 
+            if first == 'Kelvin' and second == 'Celcius':
+                self.output.config(text='Output: ' + str(round(entry - 273.15, 2)),fg='green')
+            if first == 'Kelvin' and second == 'Fahrenheit':
+                self.output.config(text='Output: ' + str(round((entry - 273.15) * 9/5 + 32, 2)),fg='green')
+        except:
+            self.output.config(text='Enter a unit',fg='red')
         
 
 
