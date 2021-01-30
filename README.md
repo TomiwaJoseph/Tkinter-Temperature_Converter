@@ -1,3 +1,3 @@
 # Temperature Converter
 
-This program allows you select to temperature units and convert them.
+This program allows you select temperature units and convert them.
