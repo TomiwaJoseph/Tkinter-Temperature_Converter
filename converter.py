@@ -5,24 +5,25 @@ from tkinter import ttk
 root = Tk()
 root.geometry('400x235')
 root.resizable(0,0)
+root.title('Temperature Converter')
+root.config(bg='#000')
 temperatures = ('Celcius', 'Fahrenheit', 'Kelvin')
 
 class Converter():
     def __init__(self):
-        Label(text='Select temperature units',fg='teal',
+        Label(text='Select temperature units',fg='teal',bg='#000',
             font='poppins 18').pack(pady=5)
-        Label(text='Enter units:',font='poppins 12').place(x=120,y=55)
+        Label(text='Enter units:',font='poppins 12',fg='teal',bg='#000').place(x=120,y=55)
         self.entry = Entry(font='calibri 14',relief='flat',width=5,
             bg='light gray',fg='teal')
         self.entry.place(x=220,y=55)
-
 
         self.f_temp = ttk.Combobox(width=9,font='calibri 14')
         self.f_temp['values'] = temperatures
         self.f_temp.current(0)
         self.f_temp.place(x=60,y=100)
 
-        Label(text='TO',font='poppins 14',fg='teal').pack(pady=(40,0))
+        Label(text='TO',font='poppins 14',fg='teal',bg='#000').pack(pady=(40,0))
 
         self.s_temp = ttk.Combobox(width=9,font='calibri 14')
         self.s_temp['values'] = temperatures
@@ -31,7 +32,7 @@ class Converter():
 
         Button(text='Convert',font='candara 14',bd=0,fg='white',
             width=8,bg='teal',command=self.convert).pack(pady=5)
-        self.output = Label(font='poppins 16')
+        self.output = Label(font='poppins 16',bg='#000')
 
     def convert(self):
         self.output.pack()
@@ -64,8 +65,6 @@ class Converter():
         except:
             self.output.config(text='Enter a unit',fg='red')
         
-
-
 
 
 if __name__ == '__main__':
